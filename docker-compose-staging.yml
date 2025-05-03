@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: your-dockerhub-username/node-ci-cd-demo:latest-${BUILD_NUMBER}
+    image: Dinesh1910/node-ci-cd-demo:latest-${BUILD_NUMBER}
     ports:
       - "8080:8080"
     restart: always
