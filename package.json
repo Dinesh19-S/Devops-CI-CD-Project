@@ -1,0 +1,17 @@
+{
+  "name": "docker-ci-cd-demo",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha tests/*.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.0",
+    "supertest": "^6.1.3"
+  }
+}
