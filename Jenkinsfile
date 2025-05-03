@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_REGISTRY = 'your-dockerhub-username'
+        DOCKER_REGISTRY = 'Dinesh1910'
         DOCKER_IMAGE = 'node-ci-cd-demo'
         DOCKER_TAG = "latest-${env.BUILD_NUMBER}"
     }
@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+                git branch: 'main', url: 'https://github.com/Dinesh19-S/Devops-CI-CD-Project.git'
             }
         }
         
@@ -34,7 +34,7 @@ pipeline {
         stage('Push to Docker Registry') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'Docker-huB') {
                         dockerImage.push()
                     }
                 }
