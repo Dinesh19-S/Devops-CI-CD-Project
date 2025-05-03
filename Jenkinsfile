@@ -1,19 +1,19 @@
 pipeline {
     agent any
-    
+
     environment {
         DOCKER_REGISTRY = 'Dinesh1910'
         DOCKER_IMAGE = 'node-ci-cd-demo'
         DOCKER_TAG = "latest-${env.BUILD_NUMBER}"
     }
-    
+
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Dinesh19-S/Devops-CI-CD-Project.git'
             }
         }
-        
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -21,16 +21,15 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Run Tests') {
             steps {
                 script {
-                    // Tests are already run during Docker build (see Dockerfile)
                     echo "Tests executed successfully during Docker build"
                 }
             }
         }
-        
+
         stage('Push to Docker Registry') {
             steps {
                 script {
@@ -40,15 +39,15 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Deploy to Staging') {
             steps {
                 script {
-                    sh "docker-compose -f docker-compose-staging.yml up -d"
+                    bat "docker-compose -f docker-compose-staging.yml up -d"
                 }
             }
         }
-        
+
         stage('Deploy to Production') {
             when {
                 branch 'main'
@@ -56,16 +55,16 @@ pipeline {
             steps {
                 input "Deploy to Production?"
                 script {
-                    sh "docker-compose -f docker-compose-production.yml up -d"
+                    bat "docker-compose -f docker-compose-production.yml up -d"
                 }
             }
         }
     }
-    
+
     post {
         always {
             echo 'Cleaning up...'
-            sh 'docker system prune -f'
+            bat 'docker system prune -f'
         }
         success {
             echo 'Pipeline completed successfully!'
